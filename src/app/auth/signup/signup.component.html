@@ -1,0 +1,86 @@
+<section class="signup-form">
+  <form [formGroup]="signupForm"
+        fxLayout="column" 
+        fxLayoutAlign="center center"
+        fxLayoutGap="10px"
+        (ngSubmit)="onSubmit(signupForm)">
+    
+    <mat-form-field> 
+      <input type="text" formControlName="firstName" placeholder="First Name" matInput>
+      <mat-error *ngIf="signupForm.get('firstName').hasError('required')">
+        First Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field> 
+      <input type="text" formControlName="lastName" placeholder="Last Name" matInput>
+      <mat-error *ngIf="signupForm.get('lastName').hasError('required')">
+        Last Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input formControlName="email" placeholder="Your Email" matInput>
+
+      <mat-error *ngIf="signupForm.get('email').invalid &&
+                       (signupForm.get('email').touched || signupForm.get('email').dirty)">
+      <mat-error *ngIf="signupForm.get('email').invalid && !signupForm.get('email').hasError('required')">
+         Email is invalid
+      </mat-error>
+      <mat-error *ngIf="signupForm.get('email').hasError('required')">
+        Email is required.
+      </mat-error>
+      </mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" 
+             formControlName="password" 
+             placeholder="Your Password" 
+             matInput>
+
+      <mat-error class="errors" *ngIf="signupForm.get('password').invalid &&
+                                      (signupForm.get('password').touched || signupForm.get('password').dirty)">
+        <mat-error *ngIf="signupForm.get('password').hasError('required')">
+          password is required
+        </mat-error>
+        <mat-error class="error-text" *ngIf="signupForm.get('password').hasError('passwordStrength')">
+         {{signupForm.get('password').errors['passwordStrength']}}
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('password').hasError('minlength') && !signupForm.get('password').hasError('passwordStrength')">
+          Password has atlease 8 characters
+        </mat-error>
+        </mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" 
+             formControlName="confirmPassword" 
+             placeholder="Confirm Password"
+             matInput>
+      <mat-error *ngIf="signupForm.get('confirmPassword').hasError('misMatchPassword')">
+        Password doesn't match
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input placeholder="Choose Your Birthdate" 
+             matInput 
+             [matDatepicker]="picker"
+             [max]="maxDate">
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="tc"
+                  color="primary">Agree to Terms & Considered</mat-checkbox>
+
+    <button mat-raised-button
+            type="submit" 
+            color="primary" 
+            [disabled]="!signupForm.valid" 
+            [disableRipple]="true">Submit</button>
+  </form>
+</section>

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ng-material-app';
+  toggleNav: boolean = true;
+
+  toggleSidebar() {
+    this.toggleNav = !this.toggleNav;
+  }
 }
