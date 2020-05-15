@@ -1,1 +1,28 @@
-<p>sigin works!</p>
+<section class="signin-form">
+  <form [formGroup]="loginForm"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="10px"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSignin()">
+    
+    <mat-form-field> 
+      <input type="email" formControlName="email" placeholder="Your Email" matInput>
+      <mat-error *ngIf="loginForm.get('email').hasError('required')">
+       Email is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field> 
+      <input type="password" formControlName="password" placeholder="Your Password" matInput>
+      <mat-error *ngIf="loginForm.get('password').hasError('required')">
+       Password is required.
+      </mat-error>
+    </mat-form-field>
+
+    <button type="submit" 
+            mat-raised-button 
+            color="primary"
+            [disabled]="!loginForm.valid">Sign In</button>
+    </form>
+    </section>

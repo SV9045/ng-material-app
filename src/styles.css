@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+* :focus :focus-within :active {
+  outline: none;
+}
+
 :root{
   font-size: 62.5%;
 }

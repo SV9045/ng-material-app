@@ -1,0 +1,11 @@
+<section class="current-training" fxLayout="column" fxLayoutAlign="center center">
+  <mat-progress-spinner mode="determinate" 
+                        [value]="progress" 
+                        color="primary"></mat-progress-spinner>
+  <h1>{{ progress }}%</h1>
+  <p>Keep going on, Goal is nearby!</p>
+  <button color="accent" 
+          mat-raised-button
+          [disableRipple]="true"
+          (click)="onStop()">Stop</button>
+</section>

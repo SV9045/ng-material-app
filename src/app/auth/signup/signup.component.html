@@ -3,24 +3,24 @@
         fxLayout="column" 
         fxLayoutAlign="center center"
         fxLayoutGap="10px"
-        (ngSubmit)="onSubmit(signupForm)">
+        (ngSubmit)="onSubmit()">
     
     <mat-form-field> 
-      <input type="text" formControlName="firstName" placeholder="First Name" matInput>
+      <input type="text" formControlName="firstName" placeholder="First Name" name="First Name" matInput>
       <mat-error *ngIf="signupForm.get('firstName').hasError('required')">
         First Name is required.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field> 
-      <input type="text" formControlName="lastName" placeholder="Last Name" matInput>
+      <input type="text" formControlName="lastName" placeholder="Last Name" name="Last Name" matInput>
       <mat-error *ngIf="signupForm.get('lastName').hasError('required')">
         Last Name is required.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input formControlName="email" placeholder="Your Email" matInput>
+      <input formControlName="email" placeholder="Your Email" name="Your Email" matInput>
 
       <mat-error *ngIf="signupForm.get('email').invalid &&
                        (signupForm.get('email').touched || signupForm.get('email').dirty)">
@@ -37,7 +37,8 @@
     <mat-form-field>
       <input type="password" 
              formControlName="password" 
-             placeholder="Your Password" 
+             placeholder="Your Password"
+             name="Your Password"
              matInput>
 
       <mat-error class="errors" *ngIf="signupForm.get('password').invalid &&
@@ -59,6 +60,7 @@
       <input type="password" 
              formControlName="confirmPassword" 
              placeholder="Confirm Password"
+             name="Confirm Password"
              matInput>
       <mat-error *ngIf="signupForm.get('confirmPassword').hasError('misMatchPassword')">
         Password doesn't match
@@ -66,7 +68,8 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input placeholder="Choose Your Birthdate" 
+      <input placeholder="Choose Your Birthdate"
+             name="Choose Your Birthdate" 
              matInput 
              [matDatepicker]="picker"
              [max]="maxDate">
@@ -75,9 +78,11 @@
     </mat-form-field>
 
     <mat-checkbox formControlName="tc"
-                  color="primary">Agree to Terms & Considered</mat-checkbox>
+                  color="primary"
+                  aria-describedby="terms and conditions">Agree to Terms & Considered</mat-checkbox>
 
     <button mat-raised-button
+            name="submit-button"
             type="submit" 
             color="primary" 
             [disabled]="!signupForm.valid" 

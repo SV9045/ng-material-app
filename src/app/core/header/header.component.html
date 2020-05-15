@@ -10,15 +10,16 @@
           <mat-icon>menu</mat-icon>
         </button>
 
-  <span><a [routerLink]="['/']" routerLinkActive="router-link-active" >(LOGO)</a></span>
+  <span><a [routerLink]="['/']">(LOGO)</a></span>
 
   <div>FitnessTracker</div> 
 
   <nav fxFlex fxLayout="row" fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="20px" class="navigation">
-      <li> <a routerLink="signup">Signup</a> </li>
-      <li> <a routerLink="signin">Signin</a> </li>
-      <li> <a routerLink="training">Training</a> </li>
+      <li *ngIf="!isLoggedIn"> <a routerLink="signup">Signup</a> </li>
+      <li *ngIf="!isLoggedIn"> <a routerLink="signin">Signin</a> </li>
+      <li *ngIf="isLoggedIn"> <a routerLink="training">Training</a> </li>
+      <li *ngIf="isLoggedIn"> <a id="logout" (click)="onLogout()">Logout</a> </li>
     </ul>
   </nav>
     </mat-toolbar>

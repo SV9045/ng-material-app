@@ -12,6 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { TrainingComponent } from './training/training.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { NewTrainingComponent } from './training/new-training/new-training.component';
+import { PastTrainingComponent } from './training/past-training/past-training.component';
+import { CurrentTrainingComponent } from './training/current-training/current-training.component';
+import { StopTrainingComponent } from './training/current-training/stop-training/stop-training.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { WelcomeComponent } from './welcome/welcome.component';
     SignupComponent,
     SiginComponent,
     TrainingComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NewTrainingComponent,
+    PastTrainingComponent,
+    CurrentTrainingComponent,
+    StopTrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +39,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     CoreModule,
     AppRoutingModule,
   ],
+  entryComponents: [StopTrainingComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
