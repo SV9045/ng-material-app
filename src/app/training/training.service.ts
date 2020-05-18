@@ -3,18 +3,20 @@ import { Subject } from 'rxjs/Subject';
 import { Exercise } from './exercise.model';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
+import { UiService } from '../shared/ui.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ExerciseService {
+export class TrainingService {
   private availableExercise: Exercise[] = [];
   private onGoingExercise: Exercise;
   isExerciseChanged = new Subject<Exercise>();
   exerciseChanged = new Subject<Exercise[]>();
   isCompletedExerciseChanged = new Subject<Exercise[]>();
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore,
+              private uiService: UiService) {}
 
   fetchAvailableExercise() {
     this.db
@@ -25,10 +27,10 @@ export class ExerciseService {
           return docData.map((doc) => {
             return {
               id: doc.payload.doc.id,
-              ...doc.payload.doc.data(),
-              // name: doc.payload.doc.data().name,
-              // duration: doc.payload.doc.data().duration,
-              // caloriesBurned: doc.payload.doc.data().caloriesBurned
+              // ...doc.payload.doc.data(),
+              name: doc.payload.doc.data().name,
+              duration: doc.payload.doc.data().duration,
+              caloriesBurned: doc.payload.doc.data().caloriesBurned
             };
           });
         })
@@ -39,7 +41,9 @@ export class ExerciseService {
           this.exerciseChanged.next([...this.availableExercise]);
         },
         (error) => {
-          console.log(error);
+          this.uiService.loadingStateChanged.next(false);
+          this.uiService.showSnackbar('Error occured, please try again later', null, 3000);
+          this.exerciseChanged.next(null);
         }
       );
   }

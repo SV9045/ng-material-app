@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ExerciseService } from '../exercise.service';
+import { TrainingService } from '../training.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Exercise } from '../exercise.model';
@@ -12,16 +12,25 @@ import { Exercise } from '../exercise.model';
 export class NewTrainingComponent implements OnInit, OnDestroy {
   exercises: Exercise[];
   exerciseSubscription: Subscription;
-  constructor(private exerciseService: ExerciseService) {}
+  isLoading = true;
+  constructor(private trainingService: TrainingService) {}
 
   ngOnInit(): void {
-    this.exerciseSubscription = this.exerciseService.exerciseChanged
-    .subscribe((exrecises) => (this.exercises = exrecises));
-    this.exerciseService.fetchAvailableExercise();
+    this.exerciseSubscription = this.trainingService.exerciseChanged.subscribe(
+      (exrecises) => {
+        this.isLoading = false;
+        this.exercises = exrecises;
+      }
+    );
+    this.tryAgain();
   }
 
   onStart(form: NgForm) {
-    this.exerciseService.startExercise(form.value.exercise);
+    this.trainingService.startExercise(form.value.exercise);
+  }
+
+  tryAgain() {
+    this.trainingService.fetchAvailableExercise();
   }
 
   ngOnDestroy() {

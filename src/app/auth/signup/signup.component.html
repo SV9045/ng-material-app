@@ -81,11 +81,13 @@
                   color="primary"
                   aria-describedby="terms and conditions">Agree to Terms & Considered</mat-checkbox>
 
-    <button mat-raised-button
+    <button *ngIf="!isLoading"
+            mat-raised-button
             name="submit-button"
             type="submit" 
             color="primary" 
             [disabled]="!signupForm.valid" 
             [disableRipple]="true">Submit</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
   </form>
 </section>

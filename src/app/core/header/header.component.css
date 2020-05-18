@@ -5,3 +5,7 @@ mat-sidenav-container, mat-sidenav-content {
 mat-sidenav{
   width: 300px;
 }
+
+#logout{
+  cursor: pointer;
+}
