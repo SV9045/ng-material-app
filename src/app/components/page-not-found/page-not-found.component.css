@@ -1,0 +1,20 @@
+.error-template {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+#home {
+  white-space: nowrap;
+  outline: none; 
+}
+
+.error-details {
+  margin-bottom: 16px;
+}
+
+@media(max-width: 600px) {
+  h1 {
+    font-size: 22px;
+  }
+}

@@ -8,15 +8,19 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from 'src/environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './core/store/reducers/index.reducer'
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(reducers)
   ],
   bootstrap: [AppComponent]
 })
