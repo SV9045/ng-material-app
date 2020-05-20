@@ -8,8 +8,6 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from 'src/environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
-import { StoreModule } from '@ngrx/store';
-import { reducers } from './core/store/reducers/index.reducer'
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -31,8 +29,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
-    AppRoutingModule,
-    StoreModule.forRoot(reducers)
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })

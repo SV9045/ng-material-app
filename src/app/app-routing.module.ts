@@ -9,8 +9,8 @@ const routes: Routes = [
   { path: '', component: WelcomeComponent },
   {
     path: 'training',
-    canLoad: [AuthGuard],
-    loadChildren: () => import('src/app/training/training.module').then((m) => m.TrainingModule)
+    loadChildren: () => import('src/app/training/training.module').then((m) => m.TrainingModule),
+    canActivate: [AuthGuard]
   },
   { path: '**', component: PageNotFoundComponent}
 ];

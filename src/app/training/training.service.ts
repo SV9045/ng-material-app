@@ -19,6 +19,7 @@ export class TrainingService {
               private uiService: UiService) {}
 
   fetchAvailableExercise() {
+    this.uiService.loadingStateChanged.next(true);
     this.db
       .collection('availableExercise')
       .snapshotChanges()
@@ -28,15 +29,15 @@ export class TrainingService {
             return {
               id: doc.payload.doc.id,
               // ...doc.payload.doc.data(),
-              name: doc.payload.doc.data().name,
-              duration: doc.payload.doc.data().duration,
-              caloriesBurned: doc.payload.doc.data().caloriesBurned
+              name: doc.payload.doc.data()['name'],
+              duration: doc.payload.doc.data()['duration'],
+              calories: doc.payload.doc.data()['calories']
             };
           });
         })
       )
-      .subscribe(
-        (exercises: Exercise[]) => {
+      .subscribe((exercises: Exercise[]) => {
+          this.uiService.loadingStateChanged.next(false);
           this.availableExercise = exercises;
           this.exerciseChanged.next([...this.availableExercise]);
         },
@@ -65,11 +66,11 @@ export class TrainingService {
     this.isExerciseChanged.next(null);
   }
 
-  cancelExercise(progress) {
+  cancelExercise(progress: number) {
     this.addDataToDatabase({
       ...this.onGoingExercise,
       duration: this.onGoingExercise.duration * (progress / 100),
-      caloriesBurned: this.onGoingExercise.caloriesBurned * (progress / 100),
+      calories: this.onGoingExercise.calories * (progress / 100),
       date: new Date(),
       state: 'cancelled',
     });
