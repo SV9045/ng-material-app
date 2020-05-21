@@ -13,11 +13,11 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  displayedColumns: string[] = ['date', 'name', 'calories', 'duration', 'state'];
+  displayedColumns: string[] = ['date', 'name', 'duration', 'calories', 'state'];
   dataSource = new MatTableDataSource<Exercise>();
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   private finishedExerciseChangeSubscription: Subscription;
 
   constructor(private trainingService: TrainingService) { }
