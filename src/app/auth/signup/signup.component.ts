@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
-import { PasswordStrengthValidator } from 'src/core/validators/password-strength.validator';
-import { ConfirmPasswordValidator } from 'src/core/validators/pasword-match.validator';
+import { PasswordStrengthValidator } from 'src/app/core/validators/password-strength.validator';
+import { ConfirmPasswordValidator } from 'src/app/core/validators/pasword-match.validator';
 import { AuthService } from '../auth.service';
 import { UiService } from 'src/app/shared/ui.service';
 import { Subscription } from 'rxjs';
